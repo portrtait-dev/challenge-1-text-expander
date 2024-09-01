@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./styles.css";
 
 export default function App() {
@@ -34,6 +35,24 @@ export default function App() {
   );
 }
 
-function TextExpander() {
-  return <div>TODO</div>;
+function TextExpander({ children }) {
+  // props: children, collapsedNumWords, expandButtonText="default",         collapseButtonText="default", buttonColor="default", className="default", expanded="default"
+
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <div>
+      {children}
+
+      {/* 1. children --> turn into array of words --> slice for first 10 words --> add "..." */}
+
+      {/* 2. below */}
+      {/* {expanded ? children : childrenSliced} */}
+
+      {/* 3. below */}
+      {/* <span>
+        {expanded ? expandButtonText ? collapsedButtonText} 
+      </span> */}
+    </div>
+  );
 }
