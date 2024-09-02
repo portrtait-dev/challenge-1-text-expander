@@ -25,34 +25,47 @@ export default function App() {
         foot on the moon or when rovers were sent to roam around on Mars.
       </TextExpander>
 
-      <TextExpander expanded={true} className="box">
+      {/* <TextExpander expanded={true} className="box">
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
         discover next!
-      </TextExpander>
+      </TextExpander> */}
     </div>
   );
 }
 
-function TextExpander({ children }) {
-  // props: children, collapsedNumWords, expandButtonText="default",         collapseButtonText="default", buttonColor="default", className="default", expanded="default"
+function TextExpander({
+  children,
+  expandButtonText = "Show more",
+  collapseButtonText = "Show less",
+  buttonColor = "blue",
+}) {
+  // props: collapsedNumWords, className="default", expanded="default"
 
   const [expanded, setExpanded] = useState(false);
 
+  // 1. children --> turn into array of strings --> slice for first 10 words --> turn it back into string --> add "..." --> childrenSliced
+  const childrenSliced = children.split(" ").slice(0, 10).join(" ") + "...";
+  // console.log(childrenSliced);
+
+  const temp = {
+    marginBottom: "20px",
+  };
+
+  const text = {
+    cursor: "pointer",
+    color: buttonColor,
+  };
+
   return (
-    <div>
-      {children}
+    <div style={temp}>
+      {expanded ? children : childrenSliced}
 
-      {/* 1. children --> turn into array of words --> slice for first 10 words --> add "..." */}
-
-      {/* 2. below */}
-      {/* {expanded ? children : childrenSliced} */}
-
-      {/* 3. below */}
-      {/* <span>
-        {expanded ? expandButtonText ? collapsedButtonText} 
-      </span> */}
+      <span style={text} onClick={() => setExpanded(!expanded)}>
+        {/* Need to add a white space before the button text */}
+        {expanded ? collapseButtonText : expandButtonText}
+      </span>
     </div>
   );
 }
