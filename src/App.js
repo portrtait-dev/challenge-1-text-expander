@@ -25,12 +25,12 @@ export default function App() {
         foot on the moon or when rovers were sent to roam around on Mars.
       </TextExpander>
 
-      {/* <TextExpander expanded={true} className="box">
+      <TextExpander expand={true} className="box">
         Space missions have given us incredible insights into our universe and
         have inspired future generations to keep reaching for the stars. Space
         travel is a pretty cool thing to think about. Who knows what we'll
         discover next!
-      </TextExpander> */}
+      </TextExpander>
     </div>
   );
 }
@@ -40,30 +40,28 @@ function TextExpander({
   expandButtonText = "Show more",
   collapseButtonText = "Show less",
   buttonColor = "blue",
+  collapsedNumWords = 10,
+  expand = false,
+  className = "",
 }) {
-  // props: collapsedNumWords, className="default", expanded="default"
-
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(expand);
 
   // 1. children --> turn into array of strings --> slice for first 10 words --> turn it back into string --> add "..." --> childrenSliced
-  const childrenSliced = children.split(" ").slice(0, 10).join(" ") + "...";
+  const childrenSliced =
+    children.split(" ").slice(0, collapsedNumWords).join(" ") + "...";
   // console.log(childrenSliced);
-
-  const temp = {
-    marginBottom: "20px",
-  };
 
   const text = {
     cursor: "pointer",
     color: buttonColor,
+    marginLeft: "4px",
   };
 
   return (
-    <div style={temp}>
+    <div style={{ marginBottom: "20px" }} className={className}>
       {expanded ? children : childrenSliced}
 
       <span style={text} onClick={() => setExpanded(!expanded)}>
-        {/* Need to add a white space before the button text */}
         {expanded ? collapseButtonText : expandButtonText}
       </span>
     </div>
